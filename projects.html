@@ -15,99 +15,49 @@
         <h1>Projects</h1>
     </header>
 
-    <main>
-        <section class="project-category">
-            <h2>Tech Projects</h2>
-            <article class="project">
-                <h3>Porfolio</h3>
-                <p class="mission">
-                    <strong>Built in Tech-Moms Technical Skills Course</strong> — A personal
-                    portfolio website designed and built from scratch, hosted on GitHub Pages
-                    to showcase my projects, skills, and experience.        </p>
-
-                <h4>Features</h4>
-                <ul>
-                    <li>Built with HTML, CSS, and JavaScript and deployed using GitHub Pages</li>
-                    <li>Includes sections for About Me, Experience, Skills, Projects, and Contact Me</li>
-                    <li>Learned how to structure and style a multi-section website from scratch</li>
-                    <li>Designed and iterated on the layout through the Tech-Moms Technical Skills course</li>
-                </ul>
-
-                <!-- Portfolio Section -->
-                <div class="instagram-section">
-                    <h4>Check out my Website</h4>
-                    <a href="https://siliilagi.github.io/" target="_blank" class="instagram-link">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <!-- Screen -->
-                            <path
-                                d="M20 3H4C2.9 3 2 3.9 2 5v12c0 1.1.9 2 2 2h6l-1 3H8v1h8v-1h-1l-1-3h6c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 12H4V5h16v10z" />
-                            <!-- Keyboard base -->
-                            <path d="M1 19h22v1.5C23 21.3 22.3 22 21.5 22h-19C1.7 22 1 21.3 1 20.5V19z" />
-                        </svg>
-                        Lagi's Portfolio
-                    </a>      </div>
-            </article>
-        </section>
-
-        <section class="project-category">
-            <h2>Health & Fitness Projects</h2>
-
-            <article class="project">
-                <h3>Fitness Training</h3>
-                <p class="mission">
-                    <strong>Mission:</strong> Everyone should have access to health and fitness resources
-                    and know how to use what's available to them effectively.
-                </p>
-
-                <h4>My Journey & Qualifications</h4>
-                <ul>
-                    <li>Built an Instagram following documenting my personal fitness transformation</li>
-                    <li>Created customized fitness and nutrition plans tailored to individual lifestyles</li>
-                    <li>Minor in Exercise Sports Science</li>
-                    <li>Passionate about making fitness accessible and sustainable for everyone</li>
-                </ul>
-
-                <!-- Instagram Section -->
-                <div class="instagram-section">
-                    <h4>Follow My Fitness Journey</h4>
-                    <a href="https://www.instagram.com/_kaua.oliko.ikalani_/" target="_blank" class="instagram-link">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                        </svg>
-                        @_kaua.oliko.ikalani_
-                    </a>
-
-                    <div class="instagram-grid">
-                        <!-- Video 1 -->
-                        <div class="instagram-video-wrapper">
-                            <video class="instagram-video" loop muted playsinline>
-                                <source src="fitness1.MP4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-
-                        <!-- Video 2 -->
-                        <div class="instagram-video-wrapper">
-                            <video class="instagram-video" loop muted playsinline>
-                                <source src="fitness2.MP4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-
-                        <!-- Video 3 -->
-                        <div class="instagram-video-wrapper">
-                            <video class="instagram-video" loop muted playsinline>
-                                <source src="fitness3.MP4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
-
-                    </div>
+    <main class="projects-page">
+    
+        <!-- Filter buttons — you'll wire these up in Task 5 -->
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="HTML">HTML</button>
+            <button class="filter-btn" data-filter="CSS">CSS</button>
+            <button class="filter-btn" data-filter="JavaScript">JavaScript</button>
+            <button class="filter-btn" data-filter="Content Creation">Content Creation</button>
+            <button class="filter-btn" data-filter="Health & Fitness">Health & Fitness</button>  </div>
+    
+        <!-- Cards get injected here by JavaScript -->
+        <div class="projects-grid" id="projectsGrid"></div>
+        
+        <section class="instagram-section">
+            <h2 class="sectionTitle">Health & Fitness Content</h2>
+            <a href="https://www.instagram.com/yourusername" class="instagram-link" target="_blank">
+                Follow on Instagram ↗
+            </a>
+            <div class="instagram-grid">
+                <div class="instagram-video-wrapper">
+                    <video class="instagram-video" src="fitness1.MP4" loop muted playsinline></video>
                 </div>
-            </article>
-        </section>
+                <div class="instagram-video-wrapper">
+                    <video class="instagram-video" src="fitness2.MP4" loop muted playsinline></video>
+                </div>
+                <div class="instagram-video-wrapper">
+                    <video class="instagram-video" src="fitness3.MP4" loop muted playsinline></video>
+                </div>
+            </div>
+            </section>
     </main>
+    
+    <!-- Modal — lives outside main, hidden by default -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-tags" id="modalTags"></div>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-status" id="modalStatus"></p>
+            <p class="modal-detail" id="modalDetail"></p>
+        </div>
+    </div>
 
     <div id="footer"></div>
     <script src="main.js"></script>

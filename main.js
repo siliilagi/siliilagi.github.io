@@ -89,3 +89,259 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// ============================================================
+// TYPING ANIMATION
+// ============================================================
+
+const phrases = [
+    "Front-End Developer.",
+    "CS Graduate from BYU-Hawaiʻi.",
+    "Based in American Fork, Utah.",
+    "Born and Raised in Hāna, Maui.",
+    "Health % Fitness Advocate",
+    "Building for community impact.",
+];
+
+let phraseIndex  = 0;  // which phrase we're on
+let charIndex    = 0;  // which character we're on
+let isDeleting   = false;  // are we typing or deleting?
+
+const typedEl = document.getElementById('typed-text');
+
+function type() {
+    // If element doesn't exist (other pages), stop
+    if (!typedEl) return;
+
+    const currentPhrase = phrases[phraseIndex];
+
+    if (isDeleting) {
+        // Remove one character
+        typedEl.textContent = currentPhrase.slice(0, charIndex - 1);
+        charIndex--;
+    } else {
+        // Add one character
+        typedEl.textContent = currentPhrase.slice(0, charIndex + 1);
+        charIndex++;
+    }
+
+    // Typing speed: slower when typing, faster when deleting
+    let speed = isDeleting ? 50 : 100;
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+        // Finished typing — pause at end before deleting
+        speed = 1800;
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        // Finished deleting — move to next phrase
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        speed = 400;  // brief pause before typing next phrase
+    }
+
+    setTimeout(type, speed);
+}
+
+// Start the animation
+type();
+
+// ============================================================
+// READ MORE TOGGLE
+// ============================================================
+
+const readMoreBtn = document.getElementById('readMoreBtn');
+const aboutMore   = document.querySelector('.about-more');
+
+if (readMoreBtn && aboutMore) {
+    readMoreBtn.addEventListener('click', function () {
+
+        // Toggle the expanded class on the content
+        aboutMore.classList.toggle('expanded');
+
+        // Toggle the open class on the button (flips arrow)
+        readMoreBtn.classList.toggle('open');
+
+        // Change button text
+        const isOpen = aboutMore.classList.contains('expanded');
+        readMoreBtn.querySelector('.btn-arrow').textContent = '↓';
+        readMoreBtn.childNodes[0].textContent = isOpen ? 'Read less ' : 'Read more ';
+    });
+}
+
+// ============================================================
+// PROJECT DATA
+// ============================================================
+
+const projects = [
+    {
+        id: 1,
+        title: "Hāna Health Platform",
+        summary: "A community health tool for residents of Hāna, Maui.",
+        tags: ["HTML", "CSS", "JavaScript"],
+        detail: `A platform designed to help residents of Hāna, Maui set 
+        health goals, plan movement and nutrition, and make the most of 
+        local resources. Built to be accessible, culturally grounded, and 
+        adaptable to real-life constraints of a rural community.`,
+        status: "In Progress"
+    },
+    {
+        id: 2,
+        title: "Portfolio Website",
+        summary: "This site — built from scratch with no frameworks.",
+        tags: ["HTML", "CSS", "JavaScript"],
+        detail: `Designed and built entirely from scratch using vanilla HTML, 
+        CSS, and JavaScript. Features a shrinking hero header, typing 
+        animation, read-more toggle, filterable projects, and modal overlays 
+        — all without any libraries or frameworks.`,
+        status: "Live"
+    },
+    {
+        id: 3,
+        title: "Health & Fitness Content",
+        summary: "Fitness coaching videos and health advocacy content on Instagram.",
+        tags: ["Content Creation", "Health & Fitness"],
+        detail: `Fitness and wellness content created for social media, 
+        focused on accessible health guidance and movement. 
+        Follow along on Instagram for the latest videos.`,
+        status: "Ongoing"
+    },
+    // Add more projects here as you build them
+];
+
+// ============================================================
+// PROJECT CARDS + MODAL
+// ============================================================
+
+const projectsGrid = document.getElementById('projectsGrid');
+const modalOverlay = document.getElementById('modalOverlay');
+const modalClose   = document.getElementById('modalClose');
+const modalTitle   = document.getElementById('modalTitle');
+const modalTags    = document.getElementById('modalTags');
+const modalStatus  = document.getElementById('modalStatus');
+const modalDetail  = document.getElementById('modalDetail');
+
+// BUILD CARDS
+function buildCards(filter = 'all') {
+    if (!projectsGrid) return;
+
+    // Filter projects by tag if needed
+    const filtered = filter === 'all'
+        ? projects
+        : projects.filter(p => p.tags.includes(filter));
+
+    // Clear the grid
+    projectsGrid.innerHTML = '';
+
+    // Build a card for each project
+    filtered.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.innerHTML = `
+            <h3>${project.title}</h3>
+            <p>${project.summary}</p>
+            <div class="card-tags">
+                ${project.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+            <div class="card-footer">
+                <span class="card-status">${project.status}</span>
+                <button class="view-btn">View Details</button>
+            </div>
+        `;
+
+        // Open modal when card or button is clicked
+        card.addEventListener('click', () => openModal(project));
+        projectsGrid.appendChild(card);
+    });
+}
+
+// OPEN MODAL
+function openModal(project) {
+    // Populate modal with this project's data
+    modalTitle.textContent  = project.title;
+    modalStatus.textContent = project.status;
+    modalDetail.textContent = project.detail;
+    modalTags.innerHTML = project.tags
+        .map(t => `<span class="tag">${t}</span>`)
+        .join('');
+
+    // Show the modal
+    modalOverlay.classList.add('open');
+
+    // Prevent background from scrolling
+    document.body.style.overflow = 'hidden';
+}
+
+// CLOSE MODAL
+function closeModal() {
+    modalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// Close on X button
+if (modalClose) {
+    modalClose.addEventListener('click', closeModal);
+}
+
+// Close when clicking the dark overlay behind the modal box
+if (modalOverlay) {
+    modalOverlay.addEventListener('click', function (e) {
+        if (e.target === modalOverlay) closeModal();
+    });
+}
+
+// Close on Escape key
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeModal();
+});
+
+// Build the cards on page load
+buildCards();
+
+// ============================================================
+// FILTER BUTTONS
+// ============================================================
+
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+if (filterBtns.length > 0) {
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+
+            // Remove active class from all buttons
+            filterBtns.forEach(b => b.classList.remove('active'));
+
+            // Add active class to the clicked button
+            this.classList.add('active');
+
+            // Get the filter value from data-filter attribute
+            const filter = this.getAttribute('data-filter');
+
+            // Rebuild the cards with the new filter
+            buildCards(filter);
+        });
+    });
+}
+function buildCards(filter = 'all') {
+    if (!projectsGrid) return;
+
+    const filtered = filter === 'all'
+        ? projects
+        : projects.filter(p => p.tags.includes(filter));
+
+    projectsGrid.innerHTML = '';
+
+    // ADD THIS — show message if no projects match
+    if (filtered.length === 0) {
+        projectsGrid.innerHTML = `
+            <div class="empty-state">
+                <p>No projects yet for this category.</p>
+                <p>Check back soon — I'm always building.</p>
+            </div>
+        `;
+        return;
+    }
+
+    filtered.forEach(project => {
+        // ... rest of your existing code
+    });
+}

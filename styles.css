@@ -209,7 +209,24 @@ header {
     height: 70px;
 }
 
+.cursor {
+    display: inline-block;
+    color: white;
+    font-weight: 300;
+    animation: blink 0.7s step-end infinite;
+}
 
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
 /* ============================================================
    PAGE SHEET
    ============================================================ */
@@ -290,7 +307,49 @@ header {
     color: var(--text);
     margin: 2rem 0;
 }
+/* Hidden expandable section */
+.about-more {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
 
+/* When expanded, tall enough to show all content */
+.about-more.expanded {
+    max-height: 400px;
+}
+
+/* The button */
+.read-more-btn {
+    background: none;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    cursor: pointer;
+    margin-top: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.read-more-btn:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* Arrow flips when expanded */
+.btn-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.read-more-btn.open .btn-arrow {
+    transform: rotate(180deg);
+}
 
 /* ============================================================
    EXPERIENCE / TIMELINE
@@ -776,7 +835,215 @@ header {
     }
 }
 
+/* ============================================================
+   FILTER BAR
+   ============================================================ */
+.filter-bar {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+}
 
+.filter-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+}
+
+/* ============================================================
+   PROJECT CARDS
+   ============================================================ */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    animation: fadeUp 0.3s ease forwards;
+    /* ADD THIS LINE */
+}
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+.project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+}
+
+.project-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.project-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    flex: 1;
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background: rgba(47, 93, 68, 0.1);
+    color: var(--accent);
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+.card-status {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.view-btn {
+    background: none;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 0.35rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.view-btn:hover {
+    background: var(--accent);
+    color: white;
+}
+
+/* ============================================================
+   MODAL
+   ============================================================ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-box {
+    background: white;
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 560px;
+    width: 100%;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.open .modal-box {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    line-height: 1;
+    padding: 0.25rem;
+    transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+    color: var(--text);
+}
+
+.modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+}
+
+.modal-status {
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.modal-detail {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
 /* ============================================================
    RESPONSIVE
    ============================================================ */

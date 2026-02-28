@@ -27,9 +27,13 @@
         <section class="home">
             <div class="home-content">
                 <h1>Lagi Moeai Williams</h1>
-                <p>Software Engineer | B.S. in Computer Science | Health & Fitness Advocate</p>
+                <p class="hero-subtitle">
+                    <span id="typed-text"></span>
+                    <span class="cursor">|</span>
+                </p>
             </div>
-        </section>
+            </section>
+
     </div> <!-- closes .hero -->
 
     
@@ -50,27 +54,35 @@
                     </div>
             
                     <div class="about-summary">
-                        <p>
-                            I am a Computer Science graduate from BYU–Hawaiʻi, with minors in Exercise & Sports Science
-                            Coaching and Visual Arts. Currently, I work as an Operations Assistant at Ala Kukui, managing
-                            retreat correspondence, assisting with program operations, coordinating events, and overseeing
-                            large-scale database management. I am seeking an entry-level front-end or web development role
-                            where I can apply my current skills, continue learning, and grow as a developer while
-                            contributing to projects that have real impact.
+                    
+                        <!-- Always visible -->
+                        <p class="about-intro">
+                            I'm a Computer Science graduate from BYU–Hawaiʻi seeking an
+                            entry-level front-end or web development role. I build things
+                            that are accessible, culturally grounded, and made for real people.
                         </p>
-                        <br>
-                        <p>
-                            If you really want to know me, here's the spill: I have two keiki(children) and they keep my
-                            head spinning all the time. I am married to an amazing Samoan man from New Zealand. Some of my
-                            hobbies include baking, weightlifting, working on new projects and creating new cultural crafts
-                            that I grew up learning how to make.
-                        </p>
-                        <p>I am passionate about health and fitness, and I believe everyone deserves access to tools and
-                            guidance that support their well-being. Looking ahead, I hope to develop a platform for my
-                            hometown of Hāna, Maui, designed to help residents set health goals, plan movement and
-                            nutrition, and make the most of the resources available to them. My vision is to create
-                            something that is accessible, culturally grounded, and adaptable to real-life constraints,
-                            reflecting the unique environment and lifestyle of the community I grew up in.</p>
+                    
+                        <!-- Hidden by default, expands on click -->
+                        <div class="about-more">
+                            <p>
+                                If you really want to know me — I have two keiki who keep my
+                                head spinning. I'm married to an amazing Samoan man from New
+                                Zealand. My hobbies include baking, weightlifting, and creating
+                                cultural crafts I grew up learning how to make.
+                            </p>
+                            <p>
+                                I'm passionate about health and fitness, and I believe everyone
+                                deserves access to tools that support their well-being. I hope to
+                                build a platform for my hometown of Hāna, Maui — helping residents
+                                set health goals and make the most of what's available to them.
+                            </p>
+                        </div>
+                    
+                        <!-- The toggle button -->
+                        <button class="read-more-btn" id="readMoreBtn">
+                            Read more <span class="btn-arrow">↓</span>
+                        </button>
+                    
                     </div>
                 </div>
             </section>
