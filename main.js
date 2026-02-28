@@ -28,6 +28,15 @@ fetch('header.html')
         }
     });
 
+window.addEventListener('scroll', function () {
+    const hero = document.querySelector('.hero');
+    if (window.scrollY > 80) {
+        hero.classList.add('shrunk');
+    } else {
+        hero.classList.remove('shrunk');
+    }
+});
+
 fetch('footer.html')
     .then(res => res.text())
     .then(data => {
