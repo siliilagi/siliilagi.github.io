@@ -99,7 +99,7 @@ const phrases = [
     "CS Graduate from BYU-Hawaiʻi.",
     "Based in American Fork, Utah.",
     "Born and Raised in Hāna, Maui.",
-    "Health % Fitness Advocate",
+    "Health & Fitness Advocate",
     "Building for community impact.",
 ];
 
@@ -221,18 +221,27 @@ const modalStatus  = document.getElementById('modalStatus');
 const modalDetail  = document.getElementById('modalDetail');
 
 // BUILD CARDS
+// BUILD CARDS
 function buildCards(filter = 'all') {
     if (!projectsGrid) return;
 
-    // Filter projects by tag if needed
     const filtered = filter === 'all'
         ? projects
         : projects.filter(p => p.tags.includes(filter));
 
-    // Clear the grid
     projectsGrid.innerHTML = '';
 
-    // Build a card for each project
+    // Show message if no projects match
+    if (filtered.length === 0) {
+        projectsGrid.innerHTML = `
+            <div class="empty-state">
+                <p>No projects yet for this category.</p>
+                <p>Check back soon — I'm always building.</p>
+            </div>
+        `;
+        return;
+    }
+
     filtered.forEach(project => {
         const card = document.createElement('div');
         card.className = 'project-card';
@@ -247,8 +256,6 @@ function buildCards(filter = 'all') {
                 <button class="view-btn">View Details</button>
             </div>
         `;
-
-        // Open modal when card or button is clicked
         card.addEventListener('click', () => openModal(project));
         projectsGrid.appendChild(card);
     });
@@ -321,27 +328,33 @@ if (filterBtns.length > 0) {
         });
     });
 }
-function buildCards(filter = 'all') {
-    if (!projectsGrid) return;
 
-    const filtered = filter === 'all'
-        ? projects
-        : projects.filter(p => p.tags.includes(filter));
+// ============================================================
+// PROGRESS BAR ANIMATION
+// ============================================================
 
-    projectsGrid.innerHTML = '';
+const progressBars = document.querySelectorAll('.building-progress');
 
-    // ADD THIS — show message if no projects match
-    if (filtered.length === 0) {
-        projectsGrid.innerHTML = `
-            <div class="empty-state">
-                <p>No projects yet for this category.</p>
-                <p>Check back soon — I'm always building.</p>
-            </div>
-        `;
-        return;
-    }
+if (progressBars.length > 0) {
+    const barObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Read the target width from the inline style
+                const target = entry.target.style.width;
 
-    filtered.forEach(project => {
-        // ... rest of your existing code
-    });
+                // Start from 0
+                entry.target.style.width = '0%';
+
+                // Animate to target after a brief delay
+                setTimeout(() => {
+                    entry.target.style.width = target;
+                }, 100);
+
+                // Stop observing once animated
+                barObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    progressBars.forEach(bar => barObserver.observe(bar));
 }

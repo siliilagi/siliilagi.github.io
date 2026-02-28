@@ -1044,6 +1044,114 @@ header {
     line-height: 1.7;
     color: var(--text-muted);
 }
+
+/* ============================================================
+   CURRENTLY BUILDING
+   ============================================================ */
+.currently-building {
+    padding: 5rem 2rem;
+    background: var(--bg);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.building-inner {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.building-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+}
+
+.building-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.building-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.building-top h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.building-status {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* Pulsing green dot */
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+}
+
+.building-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+}
+
+/* Progress bar track */
+.building-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+/* Progress bar fill */
+.building-progress {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    transition: width 1s ease;
+}
+
+.building-percent {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
