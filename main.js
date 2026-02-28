@@ -17,16 +17,16 @@ fetch('header.html')
     });
 
     window.addEventListener('scroll', function () {
-        const hero = document.querySelector('.hero');
-        const pageSheet = document.querySelector('.page-sheet');
-        if (!hero || !pageSheet) return;
+        const hero   = document.querySelector('.hero');
+        const spacer = document.querySelector('.hero-spacer');
+        if (!hero || !spacer) return;
     
         if (window.scrollY > 80) {
             hero.classList.add('shrunk');
-            pageSheet.style.marginTop = '70px';
+            spacer.classList.add('shrunk');
         } else {
             hero.classList.remove('shrunk');
-            pageSheet.style.marginTop = '100vh';
+            spacer.classList.remove('shrunk');
         }
     });
 
@@ -357,4 +357,53 @@ if (progressBars.length > 0) {
     }, { threshold: 0.5 });
 
     progressBars.forEach(bar => barObserver.observe(bar));
+}
+
+// ============================================================
+// CONTACT FORM CONFIRMATION
+// ============================================================
+
+const contactForm    = document.getElementById('contactForm');
+const formSuccess    = document.getElementById('formSuccess');
+
+if (contactForm && formSuccess) {
+    contactForm.addEventListener('submit', async function (e) {
+
+        e.preventDefault();  // Stop the page from reloading
+
+        // Basic validation — check no fields are empty
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        let allFilled = true;
+
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                allFilled = false;
+                input.style.borderColor = '#ef4444';  // red border on empty fields
+            } else {
+                input.style.borderColor = '';  // reset if filled
+            }
+        });
+
+        if (!allFilled) return;  // stop if validation fails
+
+        // Send to Formspree
+        const response = await fetch('https://formspree.io/f/mdalvked', {
+            method: 'POST',
+            body: new FormData(contactForm),
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (!response.ok) return;  // silently stop if send fails
+
+        // Hide the form
+        contactForm.style.opacity = '0';
+        contactForm.style.transition = 'opacity 0.3s ease';
+
+        setTimeout(() => {
+            contactForm.style.display = 'none';
+
+            // Show success message
+            formSuccess.classList.add('visible');
+        }, 300);
+    });
 }
