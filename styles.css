@@ -84,7 +84,38 @@ header {
     overflow: hidden;
     transition: height 0.4s ease;
 }
+/* Nav links that appear inside the shrunk hero */
+.hero-nav {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 0;
+    z-index: 3;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
 
+.hero.shrunk .hero-nav {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.hero-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.2s ease;
+    border-radius: 4px;
+}
+
+.hero-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
 .hero.shrunk {
     height: 70px;
     z-index: 10;
@@ -180,14 +211,9 @@ header {
     z-index: 1;
 } */
 
-.home p {
-    font-size: clamp(1rem, 3vh, 1.5rem);
-    margin-top: 1.5vh;
-}
-
 .home-content {
     /* transform: translateY(-5vh); */
-    transform: translateY(5%);
+    transform: none;
     /* subtle floating effect */
 }
 

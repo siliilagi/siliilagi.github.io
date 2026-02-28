@@ -7,34 +7,26 @@ fetch('header.html')
     .then(data => {
         document.getElementById('header').innerHTML = data;
 
-        // Only run hero scroll observer on pages that have .home
         const nav = document.querySelector('.site-nav');
-        const hero = document.querySelector('.home');
-        if (nav && hero) {
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (!entry.isIntersecting) {
-                        nav.classList.add('show');
-                    } else {
-                        nav.classList.remove('show');
-                    }
-                },
-                { threshold: 0 }
-            );
-            observer.observe(hero);
-        } else if (nav) {
-            // Pages without hero — show nav immediately
+        const heroEl = document.querySelector('.hero');
+
+        if (nav && !heroEl) {
+            // Pages without a hero — show nav immediately
             nav.classList.add('show');
         }
     });
 
     window.addEventListener('scroll', function () {
         const hero = document.querySelector('.hero');
-        if (!hero) return;
+        const pageSheet = document.querySelector('.page-sheet');
+        if (!hero || !pageSheet) return;
+    
         if (window.scrollY > 80) {
             hero.classList.add('shrunk');
+            pageSheet.style.marginTop = '70px';
         } else {
             hero.classList.remove('shrunk');
+            pageSheet.style.marginTop = '100vh';
         }
     });
 
