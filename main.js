@@ -175,13 +175,15 @@ if (readMoreBtn && aboutMore) {
 const projects = [
     {
         id: 1,
-        title: "Hāna Health Platform",
-        summary: "A community health tool for residents of Hāna, Maui.",
-        tags: ["HTML", "CSS", "JavaScript"],
-        detail: `A platform designed to help residents of Hāna, Maui set 
-        health goals, plan movement and nutrition, and make the most of 
-        local resources. Built to be accessible, culturally grounded, and 
-        adaptable to real-life constraints of a rural community.`,
+        title: "Community Health & Fitness Platform for Hāna (Name Pending)",
+        summary: "A health and movement tracker for residents of Hāna, Maui — login, save goals, track progress.",
+        tags: ["React 18", "Firebase", "CSS"],
+        detail: `A web app for residents of Hāna, Maui to set health goals,
+        log movement and nutrition, and track their progress over time.
+        Users can create an account, save personal data, and view their history
+        — built to be accessible, culturally grounded, and designed around the
+        real constraints of a rural community with limited health resources.
+        Stack: React 18 + Firebase (Auth + Firestore).`,
         status: "In Progress"
     },
     {

@@ -584,7 +584,7 @@ header {
 .pill {
     padding: 0.45rem 1rem;
     border: 1px solid var(--border);
-    border-radius: 100px;
+    border-radius: 0;
     font-size: 0.88rem;
     color: var(--text);
     background: var(--bg-soft);
@@ -620,7 +620,7 @@ header {
     background: var(--accent);
     color: white;
     padding: 0.15rem 0.45rem;
-    border-radius: 100px;
+    border-radius: 0;
 }
 
 .skills-groups {
@@ -939,7 +939,7 @@ header {
     width: 44px;
     height: 44px;
     background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
+    border-radius: 0;
     transition: all 0.3s ease;
 }
 
@@ -1226,7 +1226,7 @@ header {
 .building-card {
     background: var(--bg-soft);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 0;
     padding: 1.75rem;
     margin-bottom: 1rem;
 }
@@ -1285,9 +1285,9 @@ header {
 
 /* Progress bar track */
 .building-bar {
-    height: 4px;
+    height: 3px;
     background: var(--border);
-    border-radius: 99px;
+    border-radius: 0;
     overflow: hidden;
     margin-bottom: 0.5rem;
 }
@@ -1296,7 +1296,7 @@ header {
 .building-progress {
     height: 100%;
     background: var(--accent);
-    border-radius: 99px;
+    border-radius: 0;
     transition: width 1s ease;
 }
 
@@ -1486,5 +1486,366 @@ header {
     .instagram-video-wrapper {
         max-width: 400px;
         margin: 0 auto;
+    }
+}
+
+
+/* ============================================================
+   ROADMAP PAGE
+   ============================================================ */
+.roadmap-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 4rem 2rem 6rem;
+}
+
+.roadmap-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.roadmap-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+}
+
+.roadmap-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.75rem;
+}
+
+.meta-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+}
+
+.meta-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+/* Phase strip */
+.phase-strip {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 3.5rem;
+    border: 1px solid var(--border);
+    overflow: hidden;
+}
+
+.phase-strip-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 1rem 1.25rem;
+    background: var(--bg-soft);
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+}
+
+.phase-strip-item:last-child {
+    border-right: none;
+}
+
+.phase-strip-item.active {
+    background: var(--primary);
+}
+
+.phase-strip-item.active .ps-num,
+.phase-strip-item.active .ps-name,
+.phase-strip-item.active .ps-date {
+    color: white;
+}
+
+.phase-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    background: var(--bg-soft);
+    border-right: 1px solid var(--border);
+}
+
+.ps-num {
+    font-size: 0.68rem;
+    font-weight: 700;
+    font-family: monospace;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+}
+
+.ps-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.ps-date {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+/* Phase blocks */
+.phases-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.roadmap-phase {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 0;
+}
+
+.roadmap-phase:last-child {
+    border-bottom: 1px solid var(--border);
+}
+
+.phase-sidebar {
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.phase-big-num {
+    font-size: 4rem;
+    font-weight: 900;
+    font-family: monospace;
+    color: var(--border);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    position: absolute;
+    top: -0.5rem;
+    right: 2rem;
+    pointer-events: none;
+    user-select: none;
+}
+
+.phase-info {
+    position: relative;
+    z-index: 1;
+}
+
+.phase-info h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.phase-dates {
+    font-family: monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 0.15rem;
+}
+
+.phase-weeks {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 0.15rem;
+}
+
+.phase-hours {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+.phase-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 0.6rem;
+    margin-top: 0.75rem;
+    width: fit-content;
+}
+
+.phase-status.current {
+    background: rgba(47, 93, 68, 0.1);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+.phase-status.upcoming {
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+}
+
+/* Phase content */
+.phase-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.phase-week-block {
+    border-left: 2px solid var(--border);
+    padding-left: 1.25rem;
+}
+
+.week-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    font-family: monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+}
+
+.phase-week-block h4 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.3rem;
+}
+
+.phase-week-block p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.phase-checkpoint {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--primary);
+    padding: 0.9rem 1.1rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.checkpoint-label {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+/* Job targets */
+.roadmap-job-section {
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.roadmap-sub-title {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.job-targets {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.75rem;
+}
+
+.job-target {
+    border: 1px solid var(--border);
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    background: var(--bg-soft);
+    transition: border-color 0.2s;
+}
+
+.job-target:hover {
+    border-color: var(--accent);
+}
+
+.job-target.primary {
+    border-top: 2px solid var(--primary);
+}
+
+.job-target.stretch {
+    border-style: dashed;
+}
+
+.job-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.job-range {
+    font-size: 0.82rem;
+    font-family: monospace;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.job-note {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+/* Roadmap responsive */
+@media (max-width: 700px) {
+    .roadmap-phase {
+        grid-template-columns: 1fr;
+    }
+
+    .phase-sidebar {
+        padding-right: 0;
+        padding-bottom: 1.5rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .phase-big-num {
+        display: none;
+    }
+
+    .phase-strip {
+        flex-wrap: wrap;
+    }
+
+    .phase-strip-item {
+        min-width: 45%;
+    }
+
+    .phase-arrow {
+        display: none;
     }
 }
