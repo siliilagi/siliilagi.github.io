@@ -126,11 +126,8 @@ header {
     position: absolute;
     top: 50%;
     left: 50%;
-    /* Swap vw/vh so the element is portrait before rotating —
-       after 90deg turn it becomes landscape and covers the full hero */
     width: 100vh;
     height: 100vw;
-    transform: translate(-50%, -50%) rotate(90deg);
     object-fit: cover;
     object-position: center;
     mix-blend-mode: multiply;
@@ -140,6 +137,7 @@ header {
     user-select: none;
     mask-image: radial-gradient(ellipse 55% 50% at center, transparent 30%, black 68%);
     -webkit-mask-image: radial-gradient(ellipse 55% 50% at center, transparent 30%, black 68%);
+    transform: translate(-50%, -50%) rotate(90deg);
 }
 
 .home {
@@ -336,7 +334,16 @@ header {
 
 /* When expanded, tall enough to show all content */
 .about-more.expanded {
-    max-height: 400px;
+    max-height: 700px;
+}
+
+.about-family-photo {
+    width: 100%;
+    max-height: 280px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    margin-bottom: 1rem;
 }
 
 /* The button */
@@ -385,7 +392,6 @@ header {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     width: 70%;
     height: auto;
     mix-blend-mode: multiply;
@@ -393,6 +399,12 @@ header {
     pointer-events: none;
     user-select: none;
     z-index: 0;
+    animation: tribalFloat 16s ease-in-out infinite;
+}
+
+@keyframes tribalFloat {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50%       { transform: translate(-50%, -50%) scale(1.05); }
 }
 
 .exp-list {
@@ -1055,6 +1067,7 @@ header {
 .project-card:hover {
     transform: translateY(-4px);
     border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent), 0 8px 28px rgba(47, 93, 68, 0.14);
 }
 
 .project-card h3 {
@@ -1227,8 +1240,21 @@ header {
     background: var(--bg-soft);
     border: 1px solid var(--border);
     border-radius: 0;
-    padding: 1.75rem;
+    overflow: hidden;
     margin-bottom: 1rem;
+    padding: 0;
+}
+
+.building-card-photo {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.building-body {
+    padding: 1.25rem 1.75rem 1.75rem;
 }
 
 .building-top {
@@ -1848,4 +1874,361 @@ header {
     .phase-arrow {
         display: none;
     }
+}
+
+
+/* ============================================================
+   HAMBURGER BUTTON (shared by site-nav and hero-nav)
+   ============================================================ */
+.nav-hamburger {
+    display: none; /* hidden on desktop */
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 10px;
+    z-index: 110;
+}
+
+.nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: white;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+/* X shape when open */
+.nav-hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.nav-hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+.nav-hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Hero-nav links wrapper — flex on desktop */
+.hero-nav-links {
+    display: flex;
+    gap: 0;
+}
+
+
+/* ============================================================
+   MOBILE NAV (≤ 700px)
+   ============================================================ */
+@media (max-width: 700px) {
+
+    /* ── Site-nav (all non-home pages) ── */
+    .site-nav {
+        background: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 1rem;
+        height: 50px;
+    }
+
+    .nav-hamburger {
+        display: flex; /* show on mobile */
+    }
+
+    .site-nav ul {
+        display: none;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: var(--primary);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        z-index: 99;
+    }
+
+    .site-nav ul.mobile-open {
+        display: flex;
+    }
+
+    .site-nav ul li a {
+        text-align: left;
+        padding: 14px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* ── Hero-nav (homepage) ── */
+    .hero-hamburger {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+    }
+
+    .hero.shrunk .hero-hamburger {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .hero-nav-links {
+        display: none;
+        position: fixed;
+        top: 70px; /* height of shrunk hero */
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(31, 61, 43, 0.97);
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        z-index: 200;
+    }
+
+    .hero-nav-links.mobile-open {
+        display: flex;
+    }
+
+    .hero-nav-links a {
+        padding: 14px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 1rem;
+        border-radius: 0;
+    }
+}
+
+
+/* ============================================================
+   GENERAL MOBILE RESPONSIVE FIXES (≤ 700px)
+   ============================================================ */
+@media (max-width: 700px) {
+
+    /* About section — reduce crushing side padding */
+    .about-me {
+        padding: 4rem 1.5rem 2rem;
+    }
+
+    /* Skills section */
+    .skills {
+        padding: 3rem 1.5rem;
+    }
+
+    /* Experience section */
+    .experience {
+        padding: 3rem 1.5rem;
+    }
+
+    /* Roadmap page */
+    .roadmap-page {
+        padding: 3rem 1.25rem 4rem;
+    }
+
+    /* Contact page */
+    .contact {
+        padding: 3rem 1.25rem 4rem;
+    }
+
+    /* Contact form padding */
+    .contact-form {
+        padding: 1.75rem 1.25rem;
+    }
+
+    /* Currently building cards — full width stack */
+    .building-inner {
+        max-width: 100%;
+    }
+
+    /* Project cards single column */
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Filter bar wraps cleanly */
+    .filter-bar {
+        gap: 0.4rem;
+    }
+
+    .filter-btn {
+        font-size: 0.78rem;
+        padding: 0.35rem 0.75rem;
+    }
+
+    /* Footer */
+    .site-footer {
+        margin-top: 3rem;
+    }
+
+    /* Section titles */
+    .sectionTitle {
+        margin-bottom: 2rem;
+    }
+}
+
+
+/* ============================================================
+   SCROLL REVEAL ANIMATION
+   ============================================================ */
+.reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ============================================================
+   VERTICAL TIMELINE (Experience page)
+   ============================================================ */
+.timeline-v {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+/* The vertical line */
+.timeline-v::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: var(--border);
+}
+
+.tl-item {
+    position: relative;
+    padding-left: 1.75rem;
+    padding-bottom: 2.25rem;
+}
+
+.tl-item:last-child {
+    padding-bottom: 0;
+}
+
+/* Square marker dot */
+.tl-dot {
+    position: absolute;
+    left: -4px;
+    top: 5px;
+    width: 9px;
+    height: 9px;
+    background: var(--primary);
+    border: 2px solid var(--bg);
+    transition: background 0.2s;
+}
+
+.tl-item:first-child .tl-dot {
+    background: var(--accent);
+    width: 11px;
+    height: 11px;
+    left: -5px;
+}
+
+.tl-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.2rem;
+}
+
+.tl-company {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.tl-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: monospace;
+    white-space: nowrap;
+}
+
+.tl-role {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.65rem;
+}
+
+.tl-photo {
+    width: 100%;
+    max-height: 240px;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.tl-section-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    margin: 3rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.tl-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+
+/* ============================================================
+   CONTACT FORM — GLASSMORPHISM
+   ============================================================ */
+.contact {
+    position: relative;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('tribal2.png');
+    background-size: 220px 220px;
+    background-repeat: repeat;
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.contact > * {
+    position: relative;
+    z-index: 1;
+}
+
+.contact-form {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px rgba(31, 61, 43, 0.08);
+}
+
+
+/* ============================================================
+   HERO NAME LETTER STAGGER (anime.js)
+   ============================================================ */
+.name-letter {
+    display: inline-block;
+}
+
+
+/* ============================================================
+   ROADMAP HOUR COUNTER
+   ============================================================ */
+.phase-hours[data-target] {
+    font-variant-numeric: tabular-nums;
 }

@@ -18,11 +18,19 @@
         <img src="tribal1.png" alt="" class="hero-tribal" aria-hidden="true">
 
         <nav class="hero-nav">
-            <a href="index.html">Home</a>
-            <a href="experience.html">Experience</a>
-            <a href="skills.html">Skills</a>
-            <a href="projects.html">Projects</a>
-            <a href="contact.html">Contact</a>
+            <button class="nav-hamburger hero-hamburger" id="heroHamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="hero-nav-links" id="heroNavLinks">
+                <a href="index.html">Home</a>
+                <a href="experience.html">Experience</a>
+                <a href="skills.html">Skills</a>
+                <a href="projects.html">Projects</a>
+                <a href="roadmap.html">Roadmap</a>
+                <a href="contact.html">Contact</a>
+            </div>
         </nav>
 
         <section class="home">
@@ -65,6 +73,7 @@
                     
                         <!-- Hidden by default, expands on click -->
                         <div class="about-more">
+                            <img src="family.jpg" alt="Lagi with family" class="about-family-photo">
                             <p>
                                 If you really want to know me — I have two keiki who keep my
                                 head spinning. I'm married to an amazing Samoan man from New
@@ -94,37 +103,42 @@
                     <div class="building-label">Currently Building</div>
 
                     <div class="building-card">
-                        <div class="building-top">
-                            <h3>Community Health & Fitness Platform for Hāna <span style="font-weight:400; color: var(--text-muted);">(Name Pending)</span></h3>
-                            <span class="building-status">
-                                <span class="pulse-dot"></span>
-                                In Progress
-                            </span>
+                        <img src="koki.jpg" alt="Koki Beach, Hāna, Maui" class="building-card-photo">
+                        <div class="building-body">
+                            <div class="building-top">
+                                <h3>Community Health & Fitness Platform for Hāna <span style="font-weight:400; color: var(--text-muted);">(Name Pending)</span></h3>
+                                <span class="building-status">
+                                    <span class="pulse-dot"></span>
+                                    In Progress
+                                </span>
+                            </div>
+                            <p>A health and movement tracker for residents of Hāna, Maui —
+                                login, save goals, and track progress over time.
+                                Stack: React 18 + Firebase.</p>
+                            <div class="building-bar">
+                                <div class="building-progress" style="width: 15%"></div>
+                            </div>
+                            <span class="building-percent">Planning · awaiting React (Phase 2)</span>
                         </div>
-                        <p>A health and movement tracker for residents of Hāna, Maui —
-                            login, save goals, and track progress over time.
-                            Stack: React 18 + Firebase.</p>
-                        <div class="building-bar">
-                            <div class="building-progress" style="width: 15%"></div>
-                        </div>
-                        <span class="building-percent">Planning · awaiting React (Phase 2)</span>
                     </div>
 
                     <div class="building-card">
-                        <div class="building-top">
-                            <h3>Pluralsight — Phase 1: Foundations</h3>
-                            <span class="building-status">
-                                <span class="pulse-dot"></span>
-                                Active
-                            </span>
+                        <div class="building-body">
+                            <div class="building-top">
+                                <h3>Pluralsight — Phase 1: Foundations</h3>
+                                <span class="building-status">
+                                    <span class="pulse-dot"></span>
+                                    Active
+                                </span>
+                            </div>
+                            <p>HTML, CSS, JavaScript, and Git — working through the Pluralsight
+                                Utah Tech Series toward a Junior Front-End Developer role.
+                                Target: 5 hrs/week through Aug 2026.</p>
+                            <div class="building-bar">
+                                <div class="building-progress" style="width: 8%"></div>
+                            </div>
+                            <span class="building-percent">Phase 1 of 4 · Week 1</span>
                         </div>
-                        <p>HTML, CSS, JavaScript, and Git — working through the Pluralsight
-                            Utah Tech Series toward a Junior Front-End Developer role.
-                            Target: 5 hrs/week through Aug 2026.</p>
-                        <div class="building-bar">
-                            <div class="building-progress" style="width: 8%"></div>
-                        </div>
-                        <span class="building-percent">Phase 1 of 4 · Week 1</span>
                     </div>
 
                 </div>
@@ -132,6 +146,7 @@
         </main>
         <div id="footer"></div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
     <script src="main.js"></script>
 </body>
 
