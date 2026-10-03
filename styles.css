@@ -2330,6 +2330,26 @@ video {
     max-width: 100%;
 }
 
+/* Project popup: long write-ups scroll inside the box instead of
+   running off the top of the screen */
+.modal-box {
+    max-height: calc(100vh - 3rem);
+    max-height: calc(100dvh - 3rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+    .modal-overlay {
+        padding: 1.5rem 1rem;
+    }
+
+    .modal-box {
+        padding: 2rem 1.5rem;
+    }
+}
+
 @media (max-width: 700px) {
 
     /* About: on phones the sections stack, so let them size to their content.
