@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // Uses setTimeout() to control the speed of each step.
 
 const phrases = [
-    "Front-End Developer.",
+    "Data & Operations.",
     "CS Graduate from BYU-Hawaiʻi.",
     "Health & Fitness Advocate",
     "Building for community impact."
@@ -327,16 +327,27 @@ if (readMoreBtn && aboutMore) {
 const projects = [
     {
         id: 1,
-        title: "Community Health & Fitness Platform for Hāna (Name Pending)",
-        summary: "A health and movement tracker for residents of Hāna, Maui — login, save goals, track progress.",
-        tags: ["React 18", "Firebase", "CSS"],
-        detail: `A web app for residents of Hāna, Maui to set health goals,
-        log movement and nutrition, and track their progress over time.
-        Users can create an account, save personal data, and view their history
-        — built to be accessible, culturally grounded, and designed around the
-        real constraints of a rural community with limited health resources.
-        Stack: React 18 + Firebase (Auth + Firestore).`,
-        status: "In Progress"
+        title: "Ala Kukui Program Attendee Demographic Dashboard",
+        summary: "Attendee records going back to 2016 — pulled into one place, cleaned, and turned into a dashboard for grant reports.",
+        tags: ["Google Sheets", "Data Analysis"],
+        detail: `Built at Ala Kukui, a nonprofit retreat center in Hāna, Maui.
+        Attendee records lived in separate sheets going back to 2016 — I
+        consolidated them into one database, merged and removed duplicates,
+        cleaned the data, and built formulas and visuals on top of it. The
+        dashboard shows program growth, community demographics, and engagement
+        for each program arm, and updates on its own as new entries are added.
+        Used for grant reports and presentations to program attendees.
+        Attendee data is private, so it is not shown here.`,
+        status: "Complete"
+    },
+    {
+        id: 4,
+        title: "Bike Sales Dashboard",
+        summary: "A Google Sheets dashboard analyzing bike sales data, built for Tech-Moms.",
+        tags: ["Google Sheets", "Data Analysis"],
+        detail: `A Google Sheets dashboard analyzing bike sales data,
+        built as a Tech-Moms project.`,
+        status: "Complete"
     },
     {
         id: 2,
@@ -361,7 +372,7 @@ const projects = [
     },
     // To add a new project, paste this template and fill it in:
     // {
-    //     id: 4,
+    //     id: 5,
     //     title: "Your Project Title",
     //     summary: "One sentence description shown on the card.",
     //     tags: ["HTML", "CSS"],         // must match filter-btn data-filter values
