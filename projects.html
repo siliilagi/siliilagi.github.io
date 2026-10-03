@@ -21,6 +21,7 @@
         <div class="filter-bar">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="Data Analysis">Data Analysis</button>
+            <button class="filter-btn" data-filter="SQL">SQL</button>
             <button class="filter-btn" data-filter="Google Sheets">Google Sheets</button>
             <button class="filter-btn" data-filter="HTML">HTML</button>
             <button class="filter-btn" data-filter="CSS">CSS</button>
@@ -39,13 +40,13 @@
             </a>
             <div class="instagram-grid">
                 <div class="instagram-video-wrapper">
-                    <video class="instagram-video" src="fitness1.MP4" loop muted playsinline></video>
+                    <video class="instagram-video" src="fitness1.MP4" loop muted playsinline preload="metadata"></video>
                 </div>
                 <div class="instagram-video-wrapper">
-                    <video class="instagram-video" src="fitness2.MP4" loop muted playsinline></video>
+                    <video class="instagram-video" src="fitness2.MP4" loop muted playsinline preload="metadata"></video>
                 </div>
                 <div class="instagram-video-wrapper">
-                    <video class="instagram-video" src="fitness3.MP4" loop muted playsinline></video>
+                    <video class="instagram-video" src="fitness3.MP4" loop muted playsinline preload="metadata"></video>
                 </div>
             </div>
             </section>
@@ -59,6 +60,10 @@
             <h2 class="modal-title" id="modalTitle"></h2>
             <p class="modal-status" id="modalStatus"></p>
             <p class="modal-detail" id="modalDetail"></p>
+            <a class="tl-site-link" id="modalLink" target="_blank" rel="noopener" style="display: none;">
+                <span class="tl-site-label">View</span>
+                <span class="tl-site-url" id="modalLinkText"></span>
+            </a>
         </div>
     </div>
 
