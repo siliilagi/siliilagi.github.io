@@ -361,25 +361,52 @@ const projects = [
     },
     {
         id: 5,
-        title: "Tech-Moms Student SQL Analysis",
-        summary: "A SQL project in Deepnote on Tech-Moms applicant data — where people drop off, and what the missing answers hide.",
-        tags: ["SQL", "Data Analysis"],
-        detail: `A SQL analysis in Deepnote using Tech-Moms student and applicant data.
+        title: "Tech-Moms Student Demographic Dashboard + SQL Analysis",
+        summary: "A Google Sheets dashboard and a SQL analysis on the same anonymized Tech-Moms application data — who applies, who enrolls, and what the missing answers hide.",
+        tags: ["Google Sheets", "SQL", "Data Analysis"],
+        detail: `Two projects on the same anonymized Tech-Moms application data,
+        built for the Data Analytics & AI cohort.
 
-        Three things I learned from the data: A lot of people apply but never
-        actually make it into a cohort — there are way more "dead leads" than
-        people who get placed, so there's a big drop-off happening somewhere in
-        the process. Veterans got into a cohort a little less often than everyone
-        else (29% vs 33%), but there were only 24 veteran applicants total, so
-        that's not enough people to call it a real trend. And many fields like
-        employment status and veteran status have missing answers — 70 people
-        skipped the employment question — so any percentages built off those
-        columns aren't the full picture.
+        Part 1, the dashboard in Google Sheets: I cleaned the raw export down to
+        1,681 applicants, documented all 14 columns in a data dictionary, and
+        built pivot tables to answer leadership's questions. The dashboard pulls
+        it together for the 556 enrolled students — race and ethnicity, education
+        level, employment status, household income, and family and household —
+        with headline numbers down the side.
+
+        Part 2, SQL in Deepnote. Three things I learned from the data: A lot of
+        people apply but never actually make it into a cohort — there are way
+        more "dead leads" than people who get placed, so there's a big drop-off
+        happening somewhere in the process. Veterans got into a cohort a little
+        less often than everyone else (29% vs 33%), but there were only 24
+        veteran applicants total, so that's not enough people to call it a real
+        trend. And many fields like employment status and veteran status have
+        missing answers — 70 people skipped the employment question — so any
+        percentages built off those columns aren't the full picture.
 
         How I used AI: I started by asking Claude to break down the order SQL
         clauses go in and the thought process behind building a query, then
         mostly used it for syntax help. I wrote my own cheat sheet by hand
         first, then had Claude turn it into a digital version.`,
+        status: "Complete"
+    },
+    {
+        id: 6,
+        title: "Airbnb Dashboard",
+        summary: "A Tableau dashboard on Seattle Airbnb listings — price by bedroom count and zip code, listing counts, and revenue across 2016.",
+        tags: ["Tableau", "Data Analysis"],
+        detail: `A Tableau dashboard built on Seattle Airbnb listing data as the full
+        project in the Tech-Moms BI module, published on Tableau Public.
+
+        Five views on one page: average price per bedroom (from about $96 a night
+        for one bedroom to $585 for six), how many listings there are at each
+        bedroom count (1,811 one-bedrooms, only 5 six-bedrooms), average price by
+        zip code on a map and as a ranked bar chart, and weekly revenue across
+        2016.`,
+        image: "airbnb-dashboard.png",
+        imageAlt: "Tableau dashboard of Seattle Airbnb listings: average price per bedroom, listing counts, price by zip code, and revenue for the year",
+        link: "https://public.tableau.com/views/AirBnBFullProject_17895945228940/Dashboard1",
+        linkLabel: "Open on Tableau Public",
         status: "Complete"
     },
     {
@@ -424,11 +451,13 @@ const projects = [
     },
     // To add a new project, paste this template and fill it in:
     // {
-    //     id: 6,
+    //     id: 7,
     //     title: "Your Project Title",
     //     summary: "One sentence description shown on the card.",
     //     tags: ["HTML", "CSS"],         // must match filter-btn data-filter values
     //     detail: `Longer description shown in the modal popup.`,
+    //     image: "my-screenshot.png",    // optional — shows a picture in the popup
+    //     imageAlt: "What the picture shows",
     //     link: "https://...",           // optional — adds a link in the popup
     //     linkLabel: "Open the project", // optional — text for that link
     //     status: "In Progress"          // or "Live", "Ongoing", "Complete"
@@ -451,6 +480,7 @@ const modalTitle   = document.getElementById('modalTitle');
 const modalTags    = document.getElementById('modalTags');
 const modalStatus  = document.getElementById('modalStatus');
 const modalDetail  = document.getElementById('modalDetail');
+const modalImage    = document.getElementById('modalImage');
 const modalLink     = document.getElementById('modalLink');
 const modalLinkText = document.getElementById('modalLinkText');
 
@@ -525,6 +555,18 @@ function openModal(project) {
     modalTags.innerHTML = project.tags
         .map(t => `<span class="tag">${t}</span>`)
         .join('');
+
+    // Show the project screenshot only if this project has one
+    if (modalImage) {
+        if (project.image) {
+            modalImage.src = project.image;
+            modalImage.alt = project.imageAlt || project.title;
+            modalImage.style.display = '';
+        } else {
+            modalImage.removeAttribute('src');
+            modalImage.style.display = 'none';
+        }
+    }
 
     // Show the project link only if this project has one
     if (modalLink && modalLinkText) {
@@ -815,4 +857,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
     revealEls.forEach(el => revealObserver.observe(el));
 });
-
