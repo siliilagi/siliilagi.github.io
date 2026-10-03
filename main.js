@@ -815,3 +815,4 @@ document.addEventListener('DOMContentLoaded', function () {
 
     revealEls.forEach(el => revealObserver.observe(el));
 });
+
