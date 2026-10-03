@@ -96,27 +96,42 @@ fetch('header.html')
 
 
 // ============================================================
-// HERO SHRINK ON SCROLL
+// HERO → NAV BAR ON SCROLL
 // ============================================================
-// Watches how far the user has scrolled.
-// Once they pass 80px, the hero image collapses into a nav bar.
-// Uses classList.add/remove to trigger the CSS transitions.
+// The hero stays fixed behind the page. As the user scrolls, the
+// white page sheet slides up over it. Once the sheet reaches the
+// top (70px from it), the hero becomes the nav bar.
+//
+// Nothing changes size while the user is scrolling — that is what
+// keeps it smooth on phones. requestAnimationFrame makes sure we
+// only do the check once per screen refresh.
 
-window.addEventListener('scroll', function () {
+(function initHeroBar() {
     const hero   = document.querySelector('.hero');
     const spacer = document.querySelector('.hero-spacer');
 
     // If neither element exists, this is not the homepage — stop.
     if (!hero || !spacer) return;
 
-    if (window.scrollY > 80) {
-        hero.classList.add('shrunk');
-        spacer.classList.add('shrunk');
-    } else {
-        hero.classList.remove('shrunk');
-        spacer.classList.remove('shrunk');
+    const BAR_HEIGHT = 70;   // must match .hero.shrunk height in styles.css
+    let ticking = false;
+
+    function update() {
+        ticking = false;
+        const switchPoint = spacer.offsetHeight - BAR_HEIGHT;
+        hero.classList.toggle('shrunk', window.scrollY >= switchPoint);
     }
-});
+
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update(); // set the right state on load (e.g. after a refresh mid-page)
+})();
 
 
 // ============================================================
@@ -275,10 +290,14 @@ type();
 
     const text = heroName.textContent;
 
-    // Wrap each character in a span — space becomes a non-breaking space
-    heroName.innerHTML = text.split('').map(char =>
-        `<span class="name-letter">${char === ' ' ? '&nbsp;' : char}</span>`
-    ).join('');
+    // Wrap each character in a span, and each word in its own wrapper
+    // so the name can only break between words (never mid-word on phones)
+    heroName.setAttribute('aria-label', text);
+    heroName.innerHTML = text.trim().split(/\s+/).map(word =>
+        `<span class="name-word" aria-hidden="true">${
+            word.split('').map(char => `<span class="name-letter">${char}</span>`).join('')
+        }</span>`
+    ).join(' ');
 
     anime({
         targets: '.name-letter',
@@ -341,12 +360,45 @@ const projects = [
         status: "Complete"
     },
     {
+        id: 5,
+        title: "Tech-Moms Student SQL Analysis",
+        summary: "A SQL project in Deepnote on Tech-Moms applicant data — where people drop off, and what the missing answers hide.",
+        tags: ["SQL", "Data Analysis"],
+        detail: `A SQL analysis in Deepnote using Tech-Moms student and applicant data.
+
+        Three things I learned from the data: A lot of people apply but never
+        actually make it into a cohort — there are way more "dead leads" than
+        people who get placed, so there's a big drop-off happening somewhere in
+        the process. Veterans got into a cohort a little less often than everyone
+        else (29% vs 33%), but there were only 24 veteran applicants total, so
+        that's not enough people to call it a real trend. And many fields like
+        employment status and veteran status have missing answers — 70 people
+        skipped the employment question — so any percentages built off those
+        columns aren't the full picture.
+
+        How I used AI: I started by asking Claude to break down the order SQL
+        clauses go in and the thought process behind building a query, then
+        mostly used it for syntax help. I wrote my own cheat sheet by hand
+        first, then had Claude turn it into a digital version.`,
+        status: "Complete"
+    },
+    {
         id: 4,
         title: "Bike Sales Dashboard",
-        summary: "A Google Sheets dashboard analyzing bike sales data, built for Tech-Moms.",
+        summary: "1,000 customer records cleaned, pivoted, and turned into a dashboard showing who buys bikes.",
         tags: ["Google Sheets", "Data Analysis"],
-        detail: `A Google Sheets dashboard analyzing bike sales data,
-        built as a Tech-Moms project.`,
+        detail: `A Google Sheets project built for the Tech-Moms Data Analytics
+        pre-requisite. I cleaned 1,000 customer records — spelled out coded
+        values, tidied the formatting, and added age brackets — then built pivot
+        tables and a dashboard on top.
+
+        What the data showed: 48.1% of customers bought a bike (481 of 1,000).
+        Buyers averaged $57,963 in income vs $54,875 for non-buyers. Middle-age
+        customers bought the most (383 of 701), and people with a 0-1 mile
+        commute bought more than any other group (200 of 366) — only 33 of 111
+        with a commute over 10 miles did.`,
+        link: "https://docs.google.com/spreadsheets/d/1QDPW3s2MvRyRhTOMOQvkH7ZSRyQgH_fdnIoPozsLoaQ/",
+        linkLabel: "Open the Google Sheet",
         status: "Complete"
     },
     {
@@ -372,11 +424,13 @@ const projects = [
     },
     // To add a new project, paste this template and fill it in:
     // {
-    //     id: 5,
+    //     id: 6,
     //     title: "Your Project Title",
     //     summary: "One sentence description shown on the card.",
     //     tags: ["HTML", "CSS"],         // must match filter-btn data-filter values
     //     detail: `Longer description shown in the modal popup.`,
+    //     link: "https://...",           // optional — adds a link in the popup
+    //     linkLabel: "Open the project", // optional — text for that link
     //     status: "In Progress"          // or "Live", "Ongoing", "Complete"
     // },
 ];
@@ -397,6 +451,8 @@ const modalTitle   = document.getElementById('modalTitle');
 const modalTags    = document.getElementById('modalTags');
 const modalStatus  = document.getElementById('modalStatus');
 const modalDetail  = document.getElementById('modalDetail');
+const modalLink     = document.getElementById('modalLink');
+const modalLinkText = document.getElementById('modalLinkText');
 
 function buildCards(filter = 'all') {
     // If the grid doesn't exist (not on Projects page), stop
@@ -457,10 +513,29 @@ function openModal(project) {
     // Fill the modal fields with this project's data
     modalTitle.textContent  = project.title;
     modalStatus.textContent = project.status;
-    modalDetail.textContent = project.detail;
+    // A blank line in a project's detail text starts a new paragraph
+    modalDetail.textContent = '';
+    project.detail.split(/\n\s*\n/).forEach((part, i) => {
+        if (i > 0) {
+            modalDetail.appendChild(document.createElement('br'));
+            modalDetail.appendChild(document.createElement('br'));
+        }
+        modalDetail.appendChild(document.createTextNode(part.replace(/\s+/g, ' ').trim()));
+    });
     modalTags.innerHTML = project.tags
         .map(t => `<span class="tag">${t}</span>`)
         .join('');
+
+    // Show the project link only if this project has one
+    if (modalLink && modalLinkText) {
+        if (project.link) {
+            modalLink.href = project.link;
+            modalLinkText.textContent = (project.linkLabel || 'Open the project') + ' →';
+            modalLink.style.display = '';
+        } else {
+            modalLink.style.display = 'none';
+        }
+    }
 
     // Make the modal visible (CSS handles the transition)
     modalOverlay.classList.add('open');
