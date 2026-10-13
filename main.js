@@ -345,6 +345,41 @@ if (readMoreBtn && aboutMore) {
 
 const projects = [
     {
+        id: 7,
+        featured: true,
+        title: "Health in Hawaiʻi: Income, Age and Who Is Left Behind",
+        summary: "A Looker Studio data story on CDC survey data for 6,636 Hawaiʻi adults — which groups report the worst health, and where the gap is biggest.",
+        tags: ["Looker", "Data Analysis"],
+        // Add a screenshot of a story page and it will replace the number panel:
+        // image: "hawaii-health-story.png",
+        stat: { value: "28%", label: "report fair or poor health in households under $25K", part: 28, whole: 100, partLabel: "vs 12% in the highest income band" },
+        question: `Which groups of Hawaiʻi adults report the worst health, and
+        which factor shows the biggest gap?`,
+        data: `The CDC's 2024 BRFSS survey. I filtered 457,670 national rows
+        down to the 6,636 Hawaiʻi respondents, weighted to represent about
+        1.1 million adults, and wrote a data dictionary for the 22 variables I
+        used.`,
+        process: `Cleaned the data in Google Sheets: recoded the 77, 88 and 99
+        "don't know / refused" codes so they wouldn't inflate averages, and
+        turned number codes into readable labels. In Looker Studio I used the
+        survey weight so every chart describes the population, not just the
+        people who answered. Then I built calculated fields for income and age
+        bands, filters, and a six-page story with a clear takeaway, plus the
+        full dashboard to explore.`,
+        findings: [
+            "About 1 in 6 adults in Hawaiʻi say their health is fair or poor.",
+            "Income shows the biggest gap: 28% in households under $25K vs 12% in the highest income band.",
+            "Health drops noticeably around age 50. For adults 50 to 64 in households under $25K, about 4 in 10 report fair or poor health. That group is small (155 people), so I treat it as a signal, not a final number.",
+            "The strongest finding wasn't in any single chart. It only showed up when I put income and age together."
+        ],
+        why: `I care about health access in Hawaiʻi, and I hope to build a
+        health platform for my hometown of Hāna someday. This was my way of
+        learning where the need is greatest.`,
+        link: "https://lookerstudio.google.com/reporting/14cd99ff-6dd2-4c8a-8dfa-9b0567dcf334",
+        linkLabel: "Open the data story in Looker Studio",
+        status: "Complete"
+    },
+    {
         id: 6,
         featured: true,
         title: "Airbnb Dashboard",
@@ -405,7 +440,7 @@ const projects = [
     },
     {
         id: 4,
-        featured: true,
+        featured: false,
         title: "Bike Sales Dashboard",
         summary: "1,000 customer records cleaned, pivoted, and turned into a dashboard showing who buys bikes.",
         tags: ["Google Sheets", "Data Analysis"],
@@ -608,7 +643,8 @@ function openModal(project) {
             ['The data', project.data],
             ['What I did', project.process],
             [project.findingsLabel || 'What I found', project.findings],
-            ['How I used AI', project.ai]
+            ['How I used AI', project.ai],
+            ['Why I chose it', project.why]
         ];
         sections.forEach(([label, content]) => {
             if (!content) return;
