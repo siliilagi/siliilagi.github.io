@@ -2424,3 +2424,187 @@ video {
         animation: none;
     }
 }
+
+/* ============================================================
+   CARD VISUALS — screenshot or headline-number panel
+   ============================================================ */
+.card-visual {
+    margin: -1.75rem -1.75rem 0.25rem;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+}
+
+.card-visual--image {
+    background: var(--bg);
+}
+
+.card-visual--image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .card-visual--image img {
+    transform: scale(1.03);
+}
+
+.card-visual--stat {
+    background:
+        radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.08), transparent 55%),
+        var(--primary);
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem 1.75rem;
+    gap: 0.35rem;
+}
+
+.stat-value {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.stat-bar {
+    margin-top: 0.9rem;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.stat-bar span {
+    display: block;
+    height: 100%;
+    background: #A8D5B5;
+}
+
+.stat-bar-label {
+    font-family: monospace;
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Project cards now have a picture on top, so the text needs a
+   little less vertical padding to stay balanced */
+.project-card h3 {
+    line-height: 1.3;
+}
+
+/* ============================================================
+   CASE STUDY POPUP — The question / The data / What I did / What I found
+   ============================================================ */
+.modal-box {
+    max-width: 680px;
+}
+
+.modal-detail .case-block {
+    padding: 1rem 0;
+    border-top: 1px solid var(--border);
+}
+
+.modal-detail .case-block:first-child {
+    border-top: none;
+    padding-top: 0;
+}
+
+.modal-detail h4 {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 0.4rem;
+}
+
+.modal-detail p {
+    margin-bottom: 0.75rem;
+}
+
+.modal-detail .case-block p:last-child {
+    margin-bottom: 0;
+}
+
+.modal-detail ul {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+
+.modal-detail li {
+    margin-bottom: 0.45rem;
+    color: var(--text);
+}
+
+.modal-detail li::marker {
+    color: var(--accent);
+}
+
+/* ============================================================
+   FEATURED WORK (Homepage)
+   ============================================================ */
+.featured-work {
+    padding: 4rem 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.featured-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.featured-head .building-label {
+    margin-bottom: 1.5rem;
+}
+
+.featured-all {
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.featured-all:hover {
+    text-decoration: underline;
+}
+
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.featured-card {
+    text-decoration: none;
+    color: inherit;
+}
+
+.featured-more {
+    margin-top: auto;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+}
+
+@media (max-width: 900px) {
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small inline link inside the About section */
+.about-link {
+    color: var(--accent);
+    font-weight: 600;
+}
