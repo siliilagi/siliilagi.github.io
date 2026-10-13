@@ -17,40 +17,18 @@
 
     <main class="projects-page">
     
-        <!-- Filter buttons — you'll wire these up in Task 5 -->
+        <!-- Filter buttons — data-filter must match a project's tags -->
         <div class="filter-bar">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="Data Analysis">Data Analysis</button>
             <button class="filter-btn" data-filter="SQL">SQL</button>
             <button class="filter-btn" data-filter="Tableau">Tableau</button>
             <button class="filter-btn" data-filter="Google Sheets">Google Sheets</button>
-            <button class="filter-btn" data-filter="HTML">HTML</button>
-            <button class="filter-btn" data-filter="CSS">CSS</button>
-            <button class="filter-btn" data-filter="JavaScript">JavaScript</button>
-            <button class="filter-btn" data-filter="Content Creation">Content Creation</button>
-            <button class="filter-btn" data-filter="Health & Fitness">Health & Fitness</button>
         </div>
     
         <!-- Cards get injected here by JavaScript -->
         <div class="projects-grid" id="projectsGrid"></div>
-        
-        <section class="instagram-section">
-            <h2 class="sectionTitle">Health & Fitness Content</h2>
-            <a href="https://www.instagram.com/_kaua.oliko.ikalani_" class="instagram-link" target="_blank">
-                Follow on Instagram ↗
-            </a>
-            <div class="instagram-grid">
-                <div class="instagram-video-wrapper">
-                    <video class="instagram-video" src="fitness1.MP4" loop muted playsinline preload="metadata"></video>
-                </div>
-                <div class="instagram-video-wrapper">
-                    <video class="instagram-video" src="fitness2.MP4" loop muted playsinline preload="metadata"></video>
-                </div>
-                <div class="instagram-video-wrapper">
-                    <video class="instagram-video" src="fitness3.MP4" loop muted playsinline preload="metadata"></video>
-                </div>
-            </div>
-            </section>
+
     </main>
     
     <!-- Modal — lives outside main, hidden by default -->
@@ -61,7 +39,7 @@
             <h2 class="modal-title" id="modalTitle"></h2>
             <p class="modal-status" id="modalStatus"></p>
             <img class="modal-image" id="modalImage" alt="" style="display: none;">
-            <p class="modal-detail" id="modalDetail"></p>
+            <div class="modal-detail" id="modalDetail"></div>
             <a class="tl-site-link" id="modalLink" target="_blank" rel="noopener" style="display: none;">
                 <span class="tl-site-label">View</span>
                 <span class="tl-site-url" id="modalLinkText"></span>
