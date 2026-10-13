@@ -345,87 +345,109 @@ if (readMoreBtn && aboutMore) {
 
 const projects = [
     {
-        id: 1,
-        title: "Ala Kukui Program Attendee Demographic Dashboard",
-        summary: "Attendee records going back to 2016 — pulled into one place, cleaned, and turned into a dashboard for grant reports.",
-        tags: ["Google Sheets", "Data Analysis"],
-        detail: `Built at Ala Kukui, a nonprofit retreat center in Hāna, Maui.
-        Attendee records lived in separate sheets going back to 2016 — I
-        consolidated them into one database, merged and removed duplicates,
-        cleaned the data, and built formulas and visuals on top of it. The
-        dashboard shows program growth, community demographics, and engagement
-        for each program arm, and updates on its own as new entries are added.
-        Used for grant reports and presentations to program attendees.
-        Attendee data is private, so it is not shown here.`,
-        status: "Complete"
-    },
-    {
-        id: 5,
-        title: "Tech-Moms Student Demographic Dashboard + SQL Analysis",
-        summary: "A Google Sheets dashboard and a SQL analysis on the same anonymized Tech-Moms application data — who applies, who enrolls, and what the missing answers hide.",
-        tags: ["Google Sheets", "SQL", "Data Analysis"],
-        detail: `Two projects on the same anonymized Tech-Moms application data,
-        built for the Data Analytics & AI cohort.
-
-        Part 1, the dashboard in Google Sheets: I cleaned the raw export down to
-        1,681 applicants, documented all 14 columns in a data dictionary, and
-        built pivot tables to answer leadership's questions. The dashboard pulls
-        it together for the 556 enrolled students — race and ethnicity, education
-        level, employment status, household income, and family and household —
-        with headline numbers down the side.
-
-        Part 2, SQL in Deepnote. Three things I learned from the data: A lot of
-        people apply but never actually make it into a cohort — there are way
-        more "dead leads" than people who get placed, so there's a big drop-off
-        happening somewhere in the process. Veterans got into a cohort a little
-        less often than everyone else (29% vs 33%), but there were only 24
-        veteran applicants total, so that's not enough people to call it a real
-        trend. And many fields like employment status and veteran status have
-        missing answers — 70 people skipped the employment question — so any
-        percentages built off those columns aren't the full picture.
-
-        How I used AI: I started by asking Claude to break down the order SQL
-        clauses go in and the thought process behind building a query, then
-        mostly used it for syntax help. I wrote my own cheat sheet by hand
-        first, then had Claude turn it into a digital version.`,
-        status: "Complete"
-    },
-    {
         id: 6,
+        featured: true,
         title: "Airbnb Dashboard",
         summary: "A Tableau dashboard on Seattle Airbnb listings — price by bedroom count and zip code, listing counts, and revenue across 2016.",
         tags: ["Tableau", "Data Analysis"],
-        detail: `A Tableau dashboard built on Seattle Airbnb listing data as the full
-        project in the Tech-Moms BI module, published on Tableau Public.
-
-        Five views on one page: average price per bedroom (from about $96 a night
-        for one bedroom to $585 for six), how many listings there are at each
-        bedroom count (1,811 one-bedrooms, only 5 six-bedrooms), average price by
-        zip code on a map and as a ranked bar chart, and weekly revenue across
-        2016.`,
         image: "airbnb-dashboard.png",
         imageAlt: "Tableau dashboard of Seattle Airbnb listings: average price per bedroom, listing counts, price by zip code, and revenue for the year",
+        question: `How does price change with bedroom count and neighborhood
+        for Seattle Airbnb listings, and how did revenue move across the year?`,
+        data: `Seattle Airbnb listing data from 2016. Built as the full project
+        in the Tech-Moms BI module.`,
+        process: `Built five views on one Tableau page: average price per
+        bedroom, listing counts by bedroom, average price by zip code on a map
+        and as a ranked bar chart, and weekly revenue across 2016. Published it
+        on Tableau Public.`,
+        findings: [
+            "Average price climbs from about $96 a night for one bedroom to $585 for six.",
+            "Most listings are small: 1,811 one-bedrooms, and only 5 six-bedrooms.",
+            "The map and ranked bar chart show which zip codes cost the most on average."
+        ],
         link: "https://public.tableau.com/views/AirBnBFullProject_17895945228940/Dashboard1",
         linkLabel: "Open on Tableau Public",
         status: "Complete"
     },
     {
+        id: 5,
+        featured: true,
+        title: "Tech-Moms Student Demographic Dashboard + SQL Analysis",
+        summary: "A Google Sheets dashboard and a SQL analysis on the same anonymized Tech-Moms application data — who applies, who enrolls, and what the missing answers hide.",
+        tags: ["Google Sheets", "SQL", "Data Analysis"],
+        // No screenshot yet, so the card shows this headline number instead.
+        // Add  image: "techmoms-dashboard.png"  and it will show the picture.
+        stat: { value: "1,681", label: "applicants cleaned and analyzed", part: 556, whole: 1681, partLabel: "556 enrolled" },
+        question: `Leadership wanted to know who applies, who actually enrolls,
+        and where people drop off along the way.`,
+        data: `Anonymized Tech-Moms application data. I cleaned the raw export
+        down to 1,681 applicants and documented all 14 columns in a data
+        dictionary.`,
+        process: `Part 1, Google Sheets: pivot tables to answer leadership's
+        questions, and a dashboard for the 556 enrolled students covering race
+        and ethnicity, education level, employment status, household income,
+        and family and household, with headline numbers down the side.
+        Part 2, SQL in Deepnote: queries on the same data to dig into
+        placement and missing answers.`,
+        findings: [
+            "A lot of people apply but never make it into a cohort. There are way more \"dead leads\" than people who get placed, so there's a big drop-off happening somewhere in the process.",
+            "Veterans got into a cohort a little less often than everyone else (29% vs 33%), but there were only 24 veteran applicants, so that's not enough to call it a real trend.",
+            "Fields like employment and veteran status have missing answers (70 people skipped the employment question), so percentages built off those columns aren't the full picture."
+        ],
+        ai: `I started by asking Claude to break down the order SQL clauses go
+        in and the thought process behind building a query, then mostly used it
+        for syntax help. I wrote my own cheat sheet by hand first, then had
+        Claude turn it into a digital version.`,
+        // Add your public Deepnote link here so people can see the SQL:
+        // link: "https://deepnote.com/...",
+        // linkLabel: "See the SQL notebook",
+        status: "Complete"
+    },
+    {
         id: 4,
+        featured: true,
         title: "Bike Sales Dashboard",
         summary: "1,000 customer records cleaned, pivoted, and turned into a dashboard showing who buys bikes.",
         tags: ["Google Sheets", "Data Analysis"],
-        detail: `A Google Sheets project built for the Tech-Moms Data Analytics
-        pre-requisite. I cleaned 1,000 customer records — spelled out coded
-        values, tidied the formatting, and added age brackets — then built pivot
-        tables and a dashboard on top.
-
-        What the data showed: 48.1% of customers bought a bike (481 of 1,000).
-        Buyers averaged $57,963 in income vs $54,875 for non-buyers. Middle-age
-        customers bought the most (383 of 701), and people with a 0-1 mile
-        commute bought more than any other group (200 of 366) — only 33 of 111
-        with a commute over 10 miles did.`,
+        stat: { value: "48.1%", label: "of customers bought a bike", part: 481, whole: 1000, partLabel: "481 of 1,000" },
+        question: `Who buys bikes? Which customers, by age, income, and
+        commute distance, are most likely to make a purchase?`,
+        data: `1,000 customer records, built for the Tech-Moms Data Analytics
+        pre-requisite.`,
+        process: `Spelled out coded values, tidied the formatting, and added
+        age brackets. Then built pivot tables and a dashboard on top.`,
+        findings: [
+            "48.1% of customers bought a bike (481 of 1,000).",
+            "Buyers averaged $57,963 in income vs $54,875 for non-buyers.",
+            "Middle-age customers bought the most (383 of 701).",
+            "Short commutes buy the most: 200 of 366 people with a 0-1 mile commute bought, but only 33 of 111 with a commute over 10 miles."
+        ],
         link: "https://docs.google.com/spreadsheets/d/1QDPW3s2MvRyRhTOMOQvkH7ZSRyQgH_fdnIoPozsLoaQ/",
         linkLabel: "Open the Google Sheet",
+        status: "Complete"
+    },
+    {
+        id: 1,
+        title: "Ala Kukui Program Attendee Demographic Dashboard",
+        summary: "Attendee records going back to 2016 — pulled into one place, cleaned, and turned into a dashboard for grant reports.",
+        tags: ["Google Sheets", "Data Analysis"],
+        // Attendee data is private. A blurred screenshot works well here:
+        // add  image: "alakukui-dashboard-blurred.png"
+        stat: { value: "2016", label: "attendee records, all in one place" },
+        question: `Ala Kukui, a nonprofit retreat center in Hāna, Maui, needed
+        clear numbers on program growth and who we serve, for grant reports and
+        presentations.`,
+        data: `Attendee records that lived in separate sheets going back to
+        2016. Attendee data is private, so it is not shown here.`,
+        process: `Consolidated the sheets into one database, merged and removed
+        duplicates, cleaned the data, and built formulas, pivot tables, and
+        charts on top of it.`,
+        findings: [
+            "A dashboard showing program growth, community demographics, and engagement for each program arm.",
+            "It updates on its own as new entries are added.",
+            "Used for grant reports and presentations to program attendees."
+        ],
+        findingsLabel: "What it does",
         status: "Complete"
     },
     {
@@ -433,33 +455,28 @@ const projects = [
         title: "Portfolio Website",
         summary: "This site — built from scratch with no frameworks.",
         tags: ["HTML", "CSS", "JavaScript"],
-        detail: `Designed and built entirely from scratch using vanilla HTML,
-        CSS, and JavaScript. Features a shrinking hero header, typing
-        animation, read-more toggle, filterable projects, and modal overlays
-        — all without any libraries or frameworks.`,
+        stat: { value: "&lt;/&gt;", label: "vanilla HTML, CSS, and JavaScript" },
+        detail: `Designed and built from scratch using vanilla HTML, CSS, and
+        JavaScript, with no frameworks. Features a shrinking hero header, typing
+        animation, read-more toggle, filterable projects, and modal overlays.`,
         status: "Live"
-    },
-    {
-        id: 3,
-        title: "Health & Fitness Content",
-        summary: "Fitness coaching videos and health advocacy content on Instagram.",
-        tags: ["Content Creation", "Health & Fitness"],
-        detail: `Fitness and wellness content created for social media,
-        focused on accessible health guidance and movement.
-        Follow along on Instagram for the latest videos.`,
-        status: "Ongoing"
     },
     // To add a new project, paste this template and fill it in:
     // {
     //     id: 7,
+    //     featured: false,               // true = shows on the homepage (keep it to 3)
     //     title: "Your Project Title",
     //     summary: "One sentence description shown on the card.",
-    //     tags: ["HTML", "CSS"],         // must match filter-btn data-filter values
-    //     detail: `Longer description shown in the modal popup.`,
-    //     image: "my-screenshot.png",    // optional — shows a picture in the popup
+    //     tags: ["SQL"],                 // must match filter-btn data-filter values
+    //     image: "my-screenshot.png",    // optional — shows on the card and in the popup
     //     imageAlt: "What the picture shows",
+    //     stat: { value: "72%", label: "short label" },  // used when there's no image
+    //     question: `What question were you answering?`,
+    //     data: `What data did you use, and where did it come from?`,
+    //     process: `What did you do to it?`,
+    //     findings: ["First thing you found", "Second thing you found"],
     //     link: "https://...",           // optional — adds a link in the popup
-    //     linkLabel: "Open the project", // optional — text for that link
+    //     linkLabel: "Open the project",
     //     status: "In Progress"          // or "Live", "Ongoing", "Complete"
     // },
 ];
@@ -483,6 +500,44 @@ const modalDetail  = document.getElementById('modalDetail');
 const modalImage    = document.getElementById('modalImage');
 const modalLink     = document.getElementById('modalLink');
 const modalLinkText = document.getElementById('modalLinkText');
+
+// ============================================================
+// CARD VISUAL (Projects page + homepage Featured Work)
+// ============================================================
+// Every card gets a picture at the top. If the project has a
+// screenshot (image), that shows. If not, a headline number
+// (stat) shows on a green panel, with an optional bar that
+// fills to show part of a whole (e.g. 481 of 1,000).
+
+function cardVisual(project) {
+    if (project.image) {
+        return `<div class="card-visual card-visual--image">
+            <img src="${project.image}" alt="${project.imageAlt || project.title}" loading="lazy">
+        </div>`;
+    }
+    if (project.stat) {
+        const st = project.stat;
+        let bar = '';
+        if (st.part && st.whole) {
+            const pct = Math.round((st.part / st.whole) * 1000) / 10;
+            bar = `<div class="stat-bar" role="img" aria-label="${st.partLabel || pct + '%'}">
+                    <span style="width:${pct}%"></span>
+                </div>
+                <span class="stat-bar-label">${st.partLabel || pct + '%'}</span>`;
+        }
+        return `<div class="card-visual card-visual--stat">
+            <span class="stat-value">${st.value}</span>
+            <span class="stat-label">${st.label}</span>
+            ${bar}
+        </div>`;
+    }
+    return '';
+}
+
+// Turns a multi-line template string into one clean line of text
+function clean(text) {
+    return text.replace(/\s+/g, ' ').trim();
+}
 
 function buildCards(filter = 'all') {
     // If the grid doesn't exist (not on Projects page), stop
@@ -514,6 +569,7 @@ function buildCards(filter = 'all') {
 
         // Build the card's inner HTML using template literals (backtick strings)
         card.innerHTML = `
+            ${cardVisual(project)}
             <h3>${project.title}</h3>
             <p>${project.summary}</p>
             <div class="card-tags">
@@ -543,15 +599,47 @@ function openModal(project) {
     // Fill the modal fields with this project's data
     modalTitle.textContent  = project.title;
     modalStatus.textContent = project.status;
-    // A blank line in a project's detail text starts a new paragraph
     modalDetail.textContent = '';
-    project.detail.split(/\n\s*\n/).forEach((part, i) => {
-        if (i > 0) {
-            modalDetail.appendChild(document.createElement('br'));
-            modalDetail.appendChild(document.createElement('br'));
-        }
-        modalDetail.appendChild(document.createTextNode(part.replace(/\s+/g, ' ').trim()));
-    });
+
+    if (project.question) {
+        // Case study layout: The question → The data → What I did → What I found
+        const sections = [
+            ['The question', project.question],
+            ['The data', project.data],
+            ['What I did', project.process],
+            [project.findingsLabel || 'What I found', project.findings],
+            ['How I used AI', project.ai]
+        ];
+        sections.forEach(([label, content]) => {
+            if (!content) return;
+            const block = document.createElement('div');
+            block.className = 'case-block';
+            const h = document.createElement('h4');
+            h.textContent = label;
+            block.appendChild(h);
+            if (Array.isArray(content)) {
+                const ul = document.createElement('ul');
+                content.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = clean(item);
+                    ul.appendChild(li);
+                });
+                block.appendChild(ul);
+            } else {
+                const p = document.createElement('p');
+                p.textContent = clean(content);
+                block.appendChild(p);
+            }
+            modalDetail.appendChild(block);
+        });
+    } else {
+        // Plain write-up: a blank line starts a new paragraph
+        project.detail.split(/\n\s*\n/).forEach(part => {
+            const p = document.createElement('p');
+            p.textContent = clean(part);
+            modalDetail.appendChild(p);
+        });
+    }
     modalTags.innerHTML = project.tags
         .map(t => `<span class="tag">${t}</span>`)
         .join('');
@@ -611,6 +699,41 @@ document.addEventListener('keydown', function (e) {
 
 // Run buildCards once on page load to populate the grid
 buildCards();
+
+// If the link was projects.html?project=6, open that project's popup
+(function openFromUrl() {
+    if (!projectsGrid) return;
+    const id = Number(new URLSearchParams(window.location.search).get('project'));
+    const match = projects.find(p => p.id === id);
+    if (match) openModal(match);
+})();
+
+
+// ============================================================
+// FEATURED WORK (Homepage)
+// ============================================================
+// Shows the projects marked featured: true, linking each one
+// straight to its popup on the Projects page.
+
+(function buildFeatured() {
+    const grid = document.getElementById('featuredGrid');
+    if (!grid) return;
+    projects.filter(p => p.featured).forEach(project => {
+        const card = document.createElement('a');
+        card.className = 'project-card featured-card';
+        card.href = `projects.html?project=${project.id}`;
+        card.innerHTML = `
+            ${cardVisual(project)}
+            <h3>${project.title}</h3>
+            <p>${project.summary}</p>
+            <div class="card-tags">
+                ${project.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+            <span class="featured-more">Read the case study →</span>
+        `;
+        grid.appendChild(card);
+    });
+})();
 
 
 // ============================================================
